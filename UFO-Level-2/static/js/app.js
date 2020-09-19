@@ -28,15 +28,35 @@ function pressFilter() {
     // Table body
     tbody.html("");
 
-    // Select the input element and get the raw HTML node
-    var inputElement = d3.select("#datetime");
-  
-    // Get the value property of the input element
-    var inputValue = inputElement.property("value");
-  
-    console.log(inputValue);
-  
-    var filteredData = tableData.filter(j => j.datetime === inputValue);
+    // Get the value property of the input elements and set all text to lowercase
+    var selectDate = d3.select("#datetime").property("value");
+
+    var selectCountry = d3.select("#country").property("value").toLowerCase();
+
+    var selectState = d3.select("#state").property("value").toLowerCase();
+
+    var selectCity = d3.select("#city").property("value").toLowerCase();
+
+    var selectShape = d3.select("#shape").property("value").toLowerCase();
+
+    // initialize tableData as filteredData
+    filteredData = tableData;
+
+    if (selectDate) {
+    filteredData = filteredData.filter(r => r.datetime === selectDate);
+    }
+    if (selectCountry) {
+    filteredData = filteredData.filter(r => r.country === selectCountry);
+    }
+    if (selectState) {
+    filteredData = filteredData.filter(r => r.state === selectState);
+    }
+    if (selectCity) {
+    filteredData = filteredData.filter(r => r.city === selectCity);
+    }
+    if (selectShape) {
+    filteredData = filteredData.filter(r => r.shape === selectShape);
+    }
   
     console.log(filteredData);
 
